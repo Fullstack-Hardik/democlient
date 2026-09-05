@@ -12,6 +12,7 @@ import GradientWaves from "@/components/ui/GradientWaves";
 import Shuffle from "@/components/ui/Shuffle";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 import { Typewriter } from "@/components/ui/Typewriter";
+import CircularText from "@/components/ui/CircularText";
 import { ArrowRight, PlayCircle, Zap, Cpu, Fingerprint, Pencil, Settings2, Sparkles } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { SiNvidia, SiSupabase, SiGoogle, SiVercel, SiGithub, SiCloudflare, SiDocker, SiStripe } from 'react-icons/si';
@@ -153,7 +154,6 @@ export default function Home() {
                 text="Journey Beyond Earth Into the Cosmos"
                 speed={50}
                 delay={300}
-                loop={false}
               />
             </h1>
             

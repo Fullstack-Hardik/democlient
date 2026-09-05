@@ -191,8 +191,10 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
       return () => ctx.revert();
     },[]);
 
+    const AnyComponent = Component as any;
+
     return (
-      <Component
+      <AnyComponent
         ref={(node: HTMLElement) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (localRef as any).current = node;
@@ -204,7 +206,7 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
         {...props}
       >
         {children}
-      </Component>
+      </AnyComponent>
     );
   }
 );
