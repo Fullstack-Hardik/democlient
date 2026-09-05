@@ -18,10 +18,25 @@ export default function Navbar({ onMenuClick }: { onMenuClick: () => void }) {
         </a>
         
         {/* Center Links */}
-        <div className="hidden md:flex items-center space-x-6 text-sm font-medium text-white/70">
+        <div className="hidden md:flex items-center space-x-12 text-sm font-medium text-white/70">
           <a href="#" className="flex items-center gap-1.5 hover:text-white transition-colors"><Home className="w-4 h-4"/> Home</a>
           <a href="#" className="flex items-center gap-1.5 hover:text-white transition-colors"><Info className="w-4 h-4"/> About</a>
-          <a href="#" className="flex items-center gap-1.5 hover:text-white transition-colors"><Zap className="w-4 h-4"/> Services</a>
+          
+          <div className="relative group">
+            <a href="#" className="flex items-center gap-1.5 hover:text-white transition-colors py-4">
+              <Zap className="w-4 h-4"/> Services
+            </a>
+            {/* Dropdown Menu */}
+            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-0 w-48 bg-black/90 backdrop-blur-xl border border-white/10 rounded-xl p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top group-hover:translate-y-1">
+              <div className="flex flex-col space-y-1">
+                <a href="#" className="block px-4 py-2 hover:bg-white/10 rounded-lg hover:text-white transition-colors">Web Development</a>
+                <a href="#" className="block px-4 py-2 hover:bg-white/10 rounded-lg hover:text-white transition-colors">Cloud Hosting</a>
+                <a href="#" className="block px-4 py-2 hover:bg-white/10 rounded-lg hover:text-white transition-colors">Data Security</a>
+                <a href="#" className="block px-4 py-2 hover:bg-white/10 rounded-lg hover:text-white transition-colors">Consulting</a>
+              </div>
+            </div>
+          </div>
+
           <a href="#" className="flex items-center gap-1.5 hover:text-white transition-colors"><BookOpen className="w-4 h-4"/> Blog</a>
           <a href="#" className="flex items-center gap-1.5 hover:text-white transition-colors"><Mail className="w-4 h-4"/> Contact</a>
           <a href="#" className="flex items-center gap-1.5 hover:text-white transition-colors"><HelpCircle className="w-4 h-4"/> FAQs</a>

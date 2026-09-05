@@ -8,6 +8,7 @@ import { FeatureCard } from "@/components/ui/grid-feature-cards";
 import AccordionGallery from "@/components/ui/AccordionGallery";
 import ModelViewer from "@/components/ui/ModelViewer";
 import GradientWaves from "@/components/ui/GradientWaves";
+import Shuffle from "@/components/ui/Shuffle";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 import { Typewriter } from "@/components/ui/Typewriter";
 import { ArrowRight, PlayCircle, Zap, Cpu, Fingerprint, Pencil, Settings2, Sparkles } from 'lucide-react';
@@ -130,31 +131,40 @@ export default function Home() {
               autoplayDelay={5}
             />
             <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-transparent pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50 pointer-events-none" />
+        <section className="relative w-full min-h-screen flex items-center justify-center pt-24 pb-16 bg-black overflow-hidden z-20">
+          <div className="absolute inset-0 z-0 opacity-40">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/40 via-black to-black"></div>
           </div>
-
-          <div className="relative z-10 flex flex-col items-center text-center w-full max-w-5xl px-6 mt-12 animate-in fade-in duration-1000 slide-in-from-bottom-10">
-            <div className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-5 py-2 mb-8">
-              <span className="bg-white text-black text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wider">New</span>
-              <span className="text-sm font-medium text-white/90">First Commercial Flight to Mars 2026</span>
+          
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center text-center">
+            
+            <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+              <Sparkles className="w-4 h-4 text-white" />
+              <span className="text-sm font-medium text-white tracking-wide">Next Generation Platform</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tight text-white mb-6 leading-[1.1] font-serif">
-              <Typewriter text="Journey Beyond Earth Into the Cosmos" speed={50} delay={300} />
+              <Typewriter
+                text="Journey Beyond Earth Into the Cosmos"
+                speed={50}
+                delay={300}
+                loop={false}
+              />
             </h1>
-            
-            <p className="max-w-3xl text-lg md:text-xl font-medium text-white/80 mb-10 drop-shadow-md">
-              Pioneering interplanetary travel. Our advanced spacecraft make journeys to Mars safe and unforgettable.
-            </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-6 z-10">
-              <a href="#" className="group flex items-center justify-center gap-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md px-8 py-4 text-base font-semibold text-white transition hover:bg-white/20 hover:scale-105 active:scale-95">
-                Book Your Journey <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a href="#" className="group flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-white transition hover:text-white/70">
-                Watch Launch <PlayCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              </a>
-            </div>
+            <div className="max-w-3xl text-lg md:text-xl font-medium text-white/80 mb-10 drop-shadow-md">
+              <Shuffle
+                text="Experience the future of space exploration with our cutting-edge technology. Build, deploy, and scale faster than ever before."
+                shuffleDirection="right"
+                duration={0.35}
+                animationMode="evenodd"
+                shuffleTimes={1}
+                ease="power3.out"
+                stagger={0.03}
+                threshold={0.1}
+                triggerOnce={true}
+                triggerOnHover={true}
+                respectReducedMotion={true}
             
             <div className="mt-24 text-sm font-medium text-white/50 tracking-wider">
               Partnering with leading tech companies worldwide
@@ -199,18 +209,15 @@ export default function Home() {
         {/* --- 3D MODEL SECTION --- */}
         <section className="w-full relative z-20 pt-8 pb-16 bg-black flex flex-col items-center pointer-events-none">
           <AnimatedContainer className="w-full max-w-6xl px-4 flex flex-col items-center">
-            <h2 className="text-3xl font-bold tracking-wide text-white md:text-4xl lg:text-5xl text-center mb-6">
-              Cutting Edge Hardware
-            </h2>
             <div className="w-full h-[500px] md:h-[600px] relative pointer-events-auto">
               <ModelViewer
-                url="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/main/2.0/ToyCar/glTF-Binary/ToyCar.glb"
+                url="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/ToyCar/glTF-Binary/ToyCar.glb"
                 width="100%"
                 height="100%"
                 autoRotate={true}
                 autoRotateSpeed={1.0}
-                defaultZoom={0.25}
-                minZoomDistance={0.1}
+                defaultZoom={0.12}
+                minZoomDistance={0.05}
                 enableManualZoom={false}
                 enableManualRotation={false}
                 enableHoverRotation={false}
