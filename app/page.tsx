@@ -163,6 +163,14 @@ export default function Home() {
               </p>
             </div>
 
+            <div className="flex justify-center mb-8 opacity-90 hover:opacity-100 transition-opacity">
+              <CircularText
+                text="FUTURE*SPACE*EXPLORE*"
+                onHover="speedUp"
+                spinDuration={20}
+              />
+            </div>
+
             <div className="flex flex-col sm:flex-row items-center gap-6 z-10">
               <a href="#" className="group flex items-center justify-center gap-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md px-8 py-4 text-base font-semibold text-white transition hover:bg-white/20 hover:scale-105 active:scale-95">
                 Book Your Journey <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -170,14 +178,6 @@ export default function Home() {
               <a href="#" className="group flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-white transition hover:text-white/70">
                 Watch Launch <PlayCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
               </a>
-            </div>
-
-            <div className="absolute left-10 top-1/2 -translate-y-1/2 hidden xl:block opacity-70 hover:opacity-100 transition-opacity">
-              <CircularText
-                text="FUTURE*SPACE*EXPLORE*"
-                onHover="speedUp"
-                spinDuration={20}
-              />
             </div>
             
             <div className="mt-24 text-sm font-medium text-white/50 tracking-wider">
