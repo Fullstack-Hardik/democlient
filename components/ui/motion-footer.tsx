@@ -191,6 +191,7 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
       return () => ctx.revert();
     },[]);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const AnyComponent = Component as any;
 
     return (

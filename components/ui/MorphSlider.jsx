@@ -280,8 +280,26 @@ class MorphEngine {
 
     this.loadTextures();
 
+    this.isVisible = true;
+    this.io = new IntersectionObserver(([entry]) => {
+      this.isVisible = entry.isIntersecting;
+      if (this.isVisible) {
+        if (!this.raf) {
+          this.raf = requestAnimationFrame(this.boundLoop);
+        }
+      } else {
+        if (this.raf) {
+          cancelAnimationFrame(this.raf);
+          this.raf = null;
+        }
+      }
+    });
+    this.io.observe(container);
+
     this.boundLoop = this.loop.bind(this);
-    this.raf = requestAnimationFrame(this.boundLoop);
+    if (this.isVisible) {
+      this.raf = requestAnimationFrame(this.boundLoop);
+    }
   }
 
   loadTextures() {
@@ -459,7 +477,13 @@ class MorphEngine {
   }
 
   destroy() {
-    cancelAnimationFrame(this.raf);
+    if (this.raf) {
+      cancelAnimationFrame(this.raf);
+      this.raf = null;
+    }
+    if (this.io) {
+      this.io.disconnect();
+    }
     if (this.tween) this.tween.kill();
     this.resizeObserver.disconnect();
     this.canvas.removeEventListener('webglcontextlost', this.boundContextLost);
@@ -523,7 +547,7 @@ export default function MorphSlider({
       engine.destroy();
       engineRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [items, startIndex]);
 
   const handleNext = useCallback(() => engineRef.current?.next(), []);

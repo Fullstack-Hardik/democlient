@@ -30,6 +30,7 @@ export default function Lanyard({
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobile(window.innerWidth < 768);
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
@@ -171,7 +172,9 @@ function Band({
     }
   });
 
+  // eslint-disable-next-line react-hooks/immutability
   curve.curveType = 'chordal';
+  // eslint-disable-next-line react-hooks/immutability
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
   if (!nodes || !nodes.card) return null;

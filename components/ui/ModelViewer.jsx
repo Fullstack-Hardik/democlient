@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable react/no-unknown-property */
+ 
 import React, { Suspense, useMemo, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, useFBX, Environment, ContactShadows, Bounds, Html, useProgress } from '@react-three/drei';

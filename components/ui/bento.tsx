@@ -75,7 +75,6 @@ export function BentoCard({
   title,
   description,
   graphic,
-  fade = [],
 }: {
   dark?: boolean;
   className?: string;
@@ -83,7 +82,6 @@ export function BentoCard({
   title: React.ReactNode;
   description: React.ReactNode;
   graphic?: React.ReactNode;
-  fade?: ("top" | "bottom")[];
 }) {
   return (
     <motion.div

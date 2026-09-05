@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { cn } from "@/lib/utils";
 
 interface TypewriterProps {
@@ -14,10 +14,9 @@ export function Typewriter({ text, speed = 100, className, delay = 0, cursor = t
   const textRef = React.useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
     let typingInterval: NodeJS.Timeout;
 
-    timeout = setTimeout(() => {
+    const timeout = setTimeout(() => {
       let i = 0;
       typingInterval = setInterval(() => {
         if (i < text.length) {

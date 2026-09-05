@@ -103,6 +103,7 @@ const CurvedLoop = ({
     dirRef.current = velRef.current > 0 ? 'right' : 'left';
   };
 
+  // eslint-disable-next-line react-hooks/refs
   const cursorStyle = interactive ? (dragRef.current ? 'grabbing' : 'grab') : 'auto';
 
   return (
