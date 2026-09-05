@@ -500,7 +500,9 @@ export default function MorphSlider({
   const [hovering, setHovering] = useState(false);
 
   const optsRef = useRef();
-  optsRef.current = { transition, duration, ease, intensity, scale, aberration, drift, overlayColor, loop };
+  useEffect(() => {
+    optsRef.current = { transition, duration, ease, intensity, scale, aberration, drift, overlayColor, loop };
+  }, [transition, duration, ease, intensity, scale, aberration, drift, overlayColor, loop]);
 
   useEffect(() => {
     if (!containerRef.current) return undefined;

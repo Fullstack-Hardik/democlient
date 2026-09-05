@@ -43,10 +43,15 @@ const Shuffle = ({
   const hoverHandlerRef = useRef(null);
 
   useEffect(() => {
+    let active = true;
     if ('fonts' in document) {
-      if (document.fonts.status === 'loaded') setFontsLoaded(true);
-      else document.fonts.ready.then(() => setFontsLoaded(true));
-    } else setFontsLoaded(true);
+      if (document.fonts.status === 'loaded') {
+        setTimeout(() => active && setFontsLoaded(true), 0);
+      } else document.fonts.ready.then(() => active && setFontsLoaded(true));
+    } else {
+        setTimeout(() => active && setFontsLoaded(true), 0);
+    }
+    return () => { active = false; };
   }, []);
 
   const scrollTriggerStart = useMemo(() => {

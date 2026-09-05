@@ -15,7 +15,7 @@ export function FeatureCard({ feature, className, ...props }: FeatureCardPorps) 
 	const [p, setP] = React.useState<number[][] | null>(null);
 
 	React.useEffect(() => {
-		setP(genRandomPattern());
+		setTimeout(() => setP(genRandomPattern()), 0);
 	}, []);
 
 	return (

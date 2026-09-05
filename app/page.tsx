@@ -139,11 +139,7 @@ export default function Home() {
           </div>
           
           <div className="absolute top-0 right-0 w-1/3 h-screen pointer-events-auto z-10 hidden lg:block">
-             {/* 
-               IMPORTANT: Lanyard is commented out to prevent a site crash. 
-               You MUST place card.glb and lanyard.png in the 'public' folder before uncommenting this line.
-               <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} transparent={true} /> 
-             */}
+               <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} transparent={true} />
           </div>
 
           <div className="relative z-10 flex flex-col items-center text-center w-full max-w-5xl px-6 mt-12 animate-in fade-in duration-1000 slide-in-from-bottom-10">
@@ -162,19 +158,9 @@ export default function Home() {
             </h1>
             
             <div className="max-w-3xl text-lg md:text-xl font-medium text-white/80 mb-10 drop-shadow-md">
-              <Shuffle
-                text="Experience the future of space exploration with our cutting-edge technology. Build, deploy, and scale faster than ever before."
-                shuffleDirection="right"
-                duration={0.35}
-                animationMode="evenodd"
-                shuffleTimes={1}
-                ease="power3.out"
-                stagger={0.03}
-                threshold={0.1}
-                triggerOnce={true}
-                triggerOnHover={true}
-                respectReducedMotion={true}
-              />
+              <p className="hover:text-white hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] transition-all duration-500 text-white/70 cursor-default">
+                Experience the future of space exploration with our cutting-edge technology. Build, deploy, and scale faster than ever before.
+              </p>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-6 z-10">
@@ -184,6 +170,14 @@ export default function Home() {
               <a href="#" className="group flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-white transition hover:text-white/70">
                 Watch Launch <PlayCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
               </a>
+            </div>
+
+            <div className="absolute left-10 top-1/2 -translate-y-1/2 hidden xl:block opacity-70 hover:opacity-100 transition-opacity">
+              <CircularText
+                text="FUTURE*SPACE*EXPLORE*"
+                onHover="speedUp"
+                spinDuration={20}
+              />
             </div>
             
             <div className="mt-24 text-sm font-medium text-white/50 tracking-wider">
