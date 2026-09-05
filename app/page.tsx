@@ -139,7 +139,11 @@ export default function Home() {
           </div>
           
           <div className="absolute top-0 right-0 w-1/3 h-screen pointer-events-auto z-10 hidden lg:block">
-             <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} transparent={true} />
+             {/* 
+               IMPORTANT: Lanyard is commented out to prevent a site crash. 
+               You MUST place card.glb and lanyard.png in the 'public' folder before uncommenting this line.
+               <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} transparent={true} /> 
+             */}
           </div>
 
           <div className="relative z-10 flex flex-col items-center text-center w-full max-w-5xl px-6 mt-12 animate-in fade-in duration-1000 slide-in-from-bottom-10">
@@ -232,8 +236,8 @@ export default function Home() {
                 height="100%"
                 autoRotate={true}
                 autoRotateSpeed={1.0}
-                defaultZoom={0.18}
-                minZoomDistance={0.1}
+                defaultZoom={1.2}
+                minZoomDistance={0.5}
                 enableManualZoom={false}
                 enableManualRotation={false}
                 enableHoverRotation={false}
