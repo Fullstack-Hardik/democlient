@@ -236,8 +236,8 @@ export default function Home() {
                 height="100%"
                 autoRotate={true}
                 autoRotateSpeed={1.0}
-                defaultZoom={1.2}
-                minZoomDistance={0.5}
+                defaultZoom={0.7}
+                minZoomDistance={0.3}
                 enableManualZoom={false}
                 enableManualRotation={false}
                 enableHoverRotation={false}
