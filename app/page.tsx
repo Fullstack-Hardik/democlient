@@ -220,30 +220,22 @@ export default function Home() {
         </div>
 
         {/* --- MARQUEE SECTION --- */}
-        <section className="w-full py-16 bg-black overflow-hidden relative z-20 flex flex-col items-center justify-center gap-10">
+        <section className="w-full pt-16 pb-0 bg-black overflow-hidden relative z-20 flex flex-col items-center justify-center gap-10">
           <div className="w-[110%] transform-gpu bg-black border-y border-white/10 py-8">
             <LogoLoop logos={serviceLogos} speed={40} direction="left" fadeOut fadeOutColor="#000000" gap={100} />
           </div>
         </section>
 
         {/* --- 3D MODEL SECTION --- */}
-        <section className="w-full relative z-20 pt-8 pb-16 bg-black flex flex-col items-center pointer-events-none">
+        <section className="w-full relative z-20 pb-16 bg-black flex flex-col items-center pointer-events-none -mt-4">
           <AnimatedContainer className="w-full max-w-6xl px-4 flex flex-col items-center">
-            <div className="w-full h-[500px] md:h-[600px] relative pointer-events-auto">
+            <div className="w-full h-[600px] md:h-[700px] relative pointer-events-auto">
               <ModelViewer
                 url="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/ToyCar/glTF-Binary/ToyCar.glb"
                 width="100%"
                 height="100%"
                 autoRotate={true}
-                autoRotateSpeed={1.0}
-                modelScale={4}
-                defaultZoom={3}
-                minZoomDistance={1.5}
-                maxZoomDistance={3}
-                enableManualZoom={false}
-                enableManualRotation={false}
-                enableHoverRotation={false}
-                showScreenshotButton={false}
+                autoRotateSpeed={0.8}
               />
             </div>
           </AnimatedContainer>
