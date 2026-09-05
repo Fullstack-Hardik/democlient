@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import MorphSlider from "@/components/ui/MorphSlider";
 import LogoLoop from "@/components/LogoLoop";
 import Navbar from "@/components/ui/Navbar";
@@ -15,6 +16,8 @@ import { ArrowRight, PlayCircle, Zap, Cpu, Fingerprint, Pencil, Settings2, Spark
 import { motion, useReducedMotion } from 'framer-motion';
 import { SiNvidia, SiSupabase, SiGoogle, SiVercel, SiGithub, SiCloudflare, SiDocker, SiStripe } from 'react-icons/si';
 import Lenis from 'lenis';
+
+const Lanyard = dynamic(() => import('@/components/ui/Lanyard'), { ssr: false });
 
 const sliderItems = [
   { image: 'https://images.unsplash.com/photo-1782977389500-dd7adad33ebe?q=80&w=1600&auto=format&fit=crop', caption: 'Create' },
@@ -131,16 +134,18 @@ export default function Home() {
               autoplayDelay={5}
             />
             <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-transparent pointer-events-none" />
-        <section className="relative w-full min-h-screen flex items-center justify-center pt-24 pb-16 bg-black overflow-hidden z-20">
-          <div className="absolute inset-0 z-0 opacity-40">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/40 via-black to-black"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/40 via-transparent to-transparent pointer-events-none opacity-40"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50 pointer-events-none" />
           </div>
           
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center text-center">
-            
-            <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-              <Sparkles className="w-4 h-4 text-white" />
-              <span className="text-sm font-medium text-white tracking-wide">Next Generation Platform</span>
+          <div className="absolute top-0 right-0 w-1/3 h-screen pointer-events-auto z-10 hidden lg:block">
+             <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} transparent={true} />
+          </div>
+
+          <div className="relative z-10 flex flex-col items-center text-center w-full max-w-5xl px-6 mt-12 animate-in fade-in duration-1000 slide-in-from-bottom-10">
+            <div className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-5 py-2 mb-8">
+              <span className="bg-white text-black text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wider">New</span>
+              <span className="text-sm font-medium text-white/90">First Commercial Flight to Mars 2026</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tight text-white mb-6 leading-[1.1] font-serif">
@@ -151,7 +156,7 @@ export default function Home() {
                 loop={false}
               />
             </h1>
-
+            
             <div className="max-w-3xl text-lg md:text-xl font-medium text-white/80 mb-10 drop-shadow-md">
               <Shuffle
                 text="Experience the future of space exploration with our cutting-edge technology. Build, deploy, and scale faster than ever before."
@@ -165,6 +170,17 @@ export default function Home() {
                 triggerOnce={true}
                 triggerOnHover={true}
                 respectReducedMotion={true}
+              />
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-6 z-10">
+              <a href="#" className="group flex items-center justify-center gap-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md px-8 py-4 text-base font-semibold text-white transition hover:bg-white/20 hover:scale-105 active:scale-95">
+                Book Your Journey <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a href="#" className="group flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-white transition hover:text-white/70">
+                Watch Launch <PlayCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              </a>
+            </div>
             
             <div className="mt-24 text-sm font-medium text-white/50 tracking-wider">
               Partnering with leading tech companies worldwide
@@ -216,8 +232,8 @@ export default function Home() {
                 height="100%"
                 autoRotate={true}
                 autoRotateSpeed={1.0}
-                defaultZoom={0.12}
-                minZoomDistance={0.05}
+                defaultZoom={0.18}
+                minZoomDistance={0.1}
                 enableManualZoom={false}
                 enableManualRotation={false}
                 enableHoverRotation={false}
