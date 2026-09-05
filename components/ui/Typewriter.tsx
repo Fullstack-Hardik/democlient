@@ -11,35 +11,35 @@ interface TypewriterProps {
 }
 
 export function Typewriter({ text, speed = 100, className, delay = 0, cursor = true }: TypewriterProps) {
-  const [displayedText, setDisplayedText] = useState('');
-  const [started, setStarted] = useState(false);
+  const textRef = React.useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setStarted(true);
+    let timeout: NodeJS.Timeout;
+    let typingInterval: NodeJS.Timeout;
+
+    timeout = setTimeout(() => {
+      let i = 0;
+      typingInterval = setInterval(() => {
+        if (i < text.length) {
+          if (textRef.current) {
+            textRef.current.textContent = text.slice(0, i + 1);
+          }
+          i++;
+        } else {
+          clearInterval(typingInterval);
+        }
+      }, speed);
     }, delay);
-    return () => clearTimeout(timeout);
-  }, [delay]);
 
-  useEffect(() => {
-    if (!started) return;
-    
-    let i = 0;
-    const typingInterval = setInterval(() => {
-      if (i < text.length) {
-        setDisplayedText(text.slice(0, i + 1));
-        i++;
-      } else {
-        clearInterval(typingInterval);
-      }
-    }, speed);
-
-    return () => clearInterval(typingInterval);
-  }, [text, speed, started]);
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(typingInterval);
+    };
+  }, [text, speed, delay]);
 
   return (
     <span className={cn(className)}>
-      {displayedText}
+      <span ref={textRef}></span>
       {cursor && <span className="animate-pulse opacity-70">|</span>}
     </span>
   );
