@@ -200,7 +200,7 @@ function Band({
             )}
           >
             <mesh geometry={nodes.card.geometry}>
-              <meshPhysicalMaterial map={cardMap} map-anisotropy={16} clearcoat={isMobile ? 0 : 1} clearcoatRoughness={0.15} roughness={0.9} metalness={0.8} />
+              <meshStandardMaterial map={cardMap} roughness={0.8} metalness={0.5} />
             </mesh>
             <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />

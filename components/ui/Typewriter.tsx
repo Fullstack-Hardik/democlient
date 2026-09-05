@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { cn } from "@/lib/utils";
 
 interface TypewriterProps {
@@ -11,35 +12,43 @@ interface TypewriterProps {
 }
 
 export function Typewriter({ text, speed = 100, className, delay = 0, cursor = true }: TypewriterProps) {
-  const textRef = React.useRef<HTMLSpanElement>(null);
+  const characters = Array.from(text);
 
-  useEffect(() => {
-    let typingInterval: NodeJS.Timeout;
+  const container = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: speed / 1000, delayChildren: delay / 1000 },
+    },
+  };
 
-    const timeout = setTimeout(() => {
-      let i = 0;
-      typingInterval = setInterval(() => {
-        if (i < text.length) {
-          if (textRef.current) {
-            textRef.current.textContent = text.slice(0, i + 1);
-          }
-          i++;
-        } else {
-          clearInterval(typingInterval);
-        }
-      }, speed);
-    }, delay);
-
-    return () => {
-      clearTimeout(timeout);
-      clearInterval(typingInterval);
-    };
-  }, [text, speed, delay]);
+  const child = {
+    visible: { opacity: 1, display: "inline-block" },
+    hidden: { opacity: 0, display: "none" },
+  };
 
   return (
-    <span className={cn(className)}>
-      <span ref={textRef}></span>
-      {cursor && <span className="animate-pulse opacity-70">|</span>}
-    </span>
+    <motion.span
+      className={cn("inline-flex flex-wrap items-center", className)}
+      variants={container}
+      initial="hidden"
+      animate="visible"
+    >
+      {characters.map((char, index) => (
+        <motion.span variants={child} key={index} className="whitespace-pre">
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+      {cursor && (
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+          className="inline-block"
+        >
+          |
+        </motion.span>
+      )}
+    </motion.span>
   );
 }

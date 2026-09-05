@@ -41,8 +41,8 @@ const ModelViewer = ({
   }, [url]);
 
   return (
-    <div style={{ width, height, position: 'relative', margin: '0 auto' }}>
-      <Canvas shadows camera={{ position: [0, 0, 5], fov: 45 }}>
+    <div style={{ width, height, position: 'relative', margin: '0 auto', touchAction: 'pan-y' }}>
+      <Canvas shadows camera={{ position: [0, 0, 5], fov: 45 }} style={{ touchAction: 'pan-y' }}>
         <Environment preset="city" />
         <ambientLight intensity={0.6} />
         <directionalLight position={[10, 10, 10]} intensity={1.5} castShadow />

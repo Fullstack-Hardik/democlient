@@ -124,16 +124,7 @@ export default function Home() {
 
         {/* --- HERO SECTION --- */}
         <section className="relative w-full min-h-screen flex flex-col items-center justify-center pt-20 pb-20">
-          <div className="absolute inset-0 z-0">
-            <MorphSlider
-              items={sliderItems}
-              transition="melt"
-              intensity={0.55}
-              aberration={0.35}
-              drift={0.4}
-              autoplay={true}
-              autoplayDelay={5}
-            />
+          <div className="absolute inset-0 z-0 bg-black">
             <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-transparent pointer-events-none" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/40 via-transparent to-transparent pointer-events-none opacity-40"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50 pointer-events-none" />
