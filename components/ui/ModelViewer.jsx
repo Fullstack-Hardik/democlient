@@ -63,6 +63,7 @@ const ModelInner = ({
   fadeIn,
   autoRotate,
   autoRotateSpeed,
+  modelScale,
   onLoaded
 }) => {
   const outer = useRef(null);
@@ -88,10 +89,11 @@ const ModelInner = ({
   useLayoutEffect(() => {
     if (!content) return;
     const g = inner.current;
+    g.userData.modelScale = modelScale;
     g.updateWorldMatrix(true, true);
 
     const sphere = new THREE.Box3().setFromObject(g).getBoundingSphere(new THREE.Sphere());
-    const s = 1 / (sphere.radius * 2);
+    const s = (1 / (sphere.radius * 2)) * (g.userData.modelScale || 1);
     g.position.set(-sphere.center.x, -sphere.center.y, -sphere.center.z);
     g.scale.setScalar(s);
 
@@ -336,6 +338,7 @@ const ModelViewer = ({
   defaultZoom = 0.5,
   minZoomDistance = 0.5,
   maxZoomDistance = 10,
+  modelScale = 1,
   enableMouseParallax = true,
   enableManualRotation = true,
   enableHoverRotation = true,
@@ -444,25 +447,26 @@ const ModelViewer = ({
         <ContactShadows ref={contactRef} position={[0, -0.5, 0]} opacity={0.35} scale={10} blur={2} />
 
         <Suspense fallback={<Loader placeholderSrc={placeholderSrc} />}>
-          <ModelInner
-            url={url}
-            xOff={modelXOffset}
-            yOff={modelYOffset}
-            pivot={pivot}
-            initYaw={initYaw}
-            initPitch={initPitch}
-            minZoom={minZoomDistance}
-            maxZoom={maxZoomDistance}
-            enableMouseParallax={enableMouseParallax}
-            enableManualRotation={enableManualRotation}
-            enableHoverRotation={enableHoverRotation}
-            enableManualZoom={enableManualZoom}
-            autoFrame={autoFrame}
-            fadeIn={fadeIn}
-            autoRotate={autoRotate}
-            autoRotateSpeed={autoRotateSpeed}
-            onLoaded={onModelLoaded}
-          />
+            <ModelInner
+              url={url}
+              xOff={modelXOffset}
+              yOff={modelYOffset}
+              pivot={pivot}
+              initYaw={initYaw}
+              initPitch={initPitch}
+              minZoom={minZoomDistance}
+              maxZoom={maxZoomDistance}
+              enableMouseParallax={enableMouseParallax}
+              enableManualRotation={enableManualRotation}
+              enableHoverRotation={enableHoverRotation}
+              enableManualZoom={enableManualZoom}
+              autoFrame={autoFrame}
+              fadeIn={fadeIn}
+              autoRotate={autoRotate}
+              autoRotateSpeed={autoRotateSpeed}
+              modelScale={modelScale}
+              onLoaded={onModelLoaded}
+            />
         </Suspense>
 
         {!isTouch && (
