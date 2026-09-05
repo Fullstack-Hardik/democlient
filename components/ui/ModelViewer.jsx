@@ -1,5 +1,5 @@
+"use client";
 /* eslint-disable react-hooks/rules-of-hooks */
- 
 import React, { Suspense, useMemo, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, useFBX, Environment, ContactShadows, Bounds, Html, useProgress } from '@react-three/drei';
@@ -33,6 +33,16 @@ const ModelViewer = ({
   autoRotate = true,
   autoRotateSpeed = 1.0,
 }) => {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Preload the model if it's a GLTF
   useEffect(() => {
     if (url.endsWith('.glb') || url.endsWith('.gltf')) {
@@ -42,7 +52,7 @@ const ModelViewer = ({
 
   return (
     <div style={{ width, height, position: 'relative', margin: '0 auto', touchAction: 'pan-y' }}>
-      <Canvas shadows camera={{ position: [0, 0, 5], fov: 45 }} style={{ touchAction: 'pan-y' }}>
+      <Canvas shadows camera={{ position: [0, 0, 5], fov: 45 }} style={{ touchAction: 'pan-y', pointerEvents: isMobile ? 'none' : 'auto' }}>
         <Environment preset="city" />
         <ambientLight intensity={0.6} />
         <directionalLight position={[10, 10, 10]} intensity={1.5} castShadow />
@@ -60,6 +70,7 @@ const ModelViewer = ({
           makeDefault
           enableZoom={false} 
           enablePan={false}
+          enableRotate={!isMobile}
           autoRotate={autoRotate}
           autoRotateSpeed={autoRotateSpeed}
           enableDamping={true}
