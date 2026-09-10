@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 
@@ -47,13 +47,23 @@ const FEATURES: FeatureRevealProperty[] = [
 
 export function HorizontalFeatureReveal() {
   const targetRef = useRef<HTMLDivElement>(null);
+  
+  // Set offset to 'start start' and 'end end' to ensure the entire scroll area is utilized precisely
   const { scrollYProgress } = useScroll({ target: targetRef });
 
+  // Apply a spring to the scroll progress for a buttery smooth feeling
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   // 4 items, we need to scroll exactly 3 viewport widths to reach the end (-75% of the 400vw width)
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+  const x = useTransform(smoothProgress, [0, 1], ["0%", "-75%"]);
 
   return (
-    <section ref={targetRef} className="relative h-[400vh] bg-black text-white" id="services">
+    // Increased height to 600vh to slow down the scrolling speed (more vertical scroll per horizontal slide)
+    <section ref={targetRef} className="relative h-[600vh] bg-black text-white" id="services">
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
         <div className="absolute top-10 left-10 md:top-20 md:left-20 z-10">
           <h1 className="text-2xl md:text-4xl font-bold tracking-tighter uppercase">Our Services</h1>
