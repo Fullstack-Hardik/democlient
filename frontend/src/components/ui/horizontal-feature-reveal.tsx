@@ -51,10 +51,10 @@ export function HorizontalFeatureReveal() {
   // Set offset to 'start start' and 'end end' to ensure the entire scroll area is utilized precisely
   const { scrollYProgress } = useScroll({ target: targetRef });
 
-  // Apply a spring to the scroll progress for a buttery smooth feeling
+  // Apply a spring to the scroll progress for a buttery smooth feeling that doesn't feel lagging
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 400,
+    damping: 50,
     restDelta: 0.001
   });
 
@@ -62,8 +62,8 @@ export function HorizontalFeatureReveal() {
   const x = useTransform(smoothProgress, [0, 1], ["0%", "-75%"]);
 
   return (
-    // Increased height to 600vh to slow down the scrolling speed (more vertical scroll per horizontal slide)
-    <section ref={targetRef} className="relative h-[600vh] bg-black text-white" id="services">
+    // Decreased height to 300vh to increase the scrolling speed
+    <section ref={targetRef} className="relative h-[300vh] bg-black text-white" id="services">
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
         <div className="absolute top-10 left-10 md:top-20 md:left-20 z-10">
           <h1 className="text-2xl md:text-4xl font-bold tracking-tighter uppercase">Our Services</h1>
