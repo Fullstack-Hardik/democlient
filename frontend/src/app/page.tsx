@@ -11,11 +11,11 @@ const MagicBento = dynamic(() => import("@/components/ui/MagicBento"));
 const FlowArt = dynamic(() => import("@/components/ui/story-scroll"));
 const FlowSection = dynamic(() => import("@/components/ui/story-scroll").then(mod => mod.FlowSection));
 const Footer = dynamic(() => import("@/components/ui/Footer").then(mod => mod.Footer));
+import Navbar from "@/components/ui/Navbar";
 
 const premiumFont = Outfit({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] });
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     // Setup animation fallback
@@ -117,64 +117,7 @@ export default function Home() {
         
         <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-transparent via-black/20 to-black" />
 
-        <header className="absolute top-6 left-6 right-6 lg:left-12 lg:right-12 h-12 flex items-center justify-between z-20">
-        <a href="/" className="flex items-center justify-center w-32 block no-underline z-50 bg-white px-4 py-2 rounded-xl transition-all hover:bg-zinc-200" aria-label="HRDK home">
-            <img src="/logo.svg" alt="HRDK Logo" className="h-8 w-auto" />
-          </a>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <nav className="flex items-center gap-8 text-[16px] font-medium tracking-wide">
-              <a href="/" className="text-zinc-400 hover:text-white transition-colors relative group">
-                Home
-              </a>
-              <a href="/about" className="text-zinc-400 hover:text-white relative group">
-                About
-              </a>
-              <a href="/projects" className="text-zinc-400 hover:text-white transition-colors">Projects</a>
-              <a href="/gallery" className="text-zinc-400 hover:text-white transition-colors">Gallery</a>
-              <a href="/faqs" className="text-zinc-400 hover:text-white transition-colors">FAQs</a>
-              <a href="/#services" className="text-zinc-400 hover:text-white transition-colors">Services</a>
-              <a href="/contact" className="text-zinc-400 hover:text-white transition-colors">Contact</a>
-            </nav>
-            <button className="px-6 py-2.5 rounded-lg bg-white text-black font-semibold shadow-lg hover:bg-zinc-200 transition-colors">Sign Up</button>
-          </div>
-
-          {/* Mobile Hamburger Button */}
-          <button 
-            className="md:hidden flex flex-col justify-center items-center w-8 h-8 z-50 gap-1.5 group"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-            <span className={`block w-6 h-0.5 bg-white transition-opacity duration-300 ${menuOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-          </button>
-        </header>
-
-        {/* Mobile Sidebar Overlay */}
-        <div 
-          className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-          onClick={() => setMenuOpen(false)}
-        />
-
-        {/* Mobile Sidebar Panel */}
-        <div 
-          className={`fixed top-0 right-0 h-full w-[280px] bg-black/80 backdrop-blur-md border-l border-white/10 z-40 transform transition-transform duration-300 ease-out md:hidden flex flex-col px-8 py-24 gap-8 ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}
-        >
-          <nav className="flex flex-col gap-6 text-xl font-medium tracking-wide">
-            <a href="/" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>Home</a>
-            <a href="/about" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>About</a>
-            <a href="/projects" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>Projects</a>
-            <a href="/gallery" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>Gallery</a>
-            <a href="/faqs" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>FAQs</a>
-            <a href="/#services" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>Services</a>
-            <a href="/contact" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>Contact</a>
-          </nav>
-          <button className="mt-auto px-6 py-3 rounded-lg bg-white text-black font-semibold shadow-lg hover:bg-zinc-200 transition-colors w-full">
-            Sign Up
-          </button>
-        </div>
+        <Navbar zIndex={20} />
 
         <div className="relative z-10 flex flex-col items-start w-full px-6 lg:px-24 xl:px-32">
           <h1 className="flex flex-col font-semibold tracking-tighter text-6xl md:text-7xl lg:text-[5.5rem] leading-[1.1] mb-6 drop-shadow-xl text-white">

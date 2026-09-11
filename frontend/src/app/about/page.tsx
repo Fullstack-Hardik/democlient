@@ -9,11 +9,11 @@ import AboutUsSection from "@/components/about/AboutUsSection";
 import ColorBends from "@/components/ui/ColorBends";
 import { ConnoisseurStackInteractor } from "@/components/ui/connoisseur-stack-interactor";
 import { Footer } from "@/components/ui/Footer";
+import Navbar from "@/components/ui/Navbar";
 
 const premiumFont = Outfit({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] });
 
 export default function AboutPage() {
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     // Setup animation fallback
@@ -33,29 +33,7 @@ export default function AboutPage() {
   return (
     <main className={`w-full relative min-h-screen bg-black text-white ${premiumFont.className}`}>
       
-      {/* Header */}
-      <header className="absolute top-6 left-6 right-6 lg:left-12 lg:right-12 h-12 flex items-center justify-between z-50">
-        <a href="/" className="flex items-center justify-center w-32 block no-underline z-50 bg-white px-4 py-2 rounded-xl transition-all hover:bg-zinc-200" aria-label="HRDK home">
-          <img src="/logo.svg" alt="HRDK Logo" className="h-8 w-auto" />
-        </a>
-        
-        <div className="hidden md:flex items-center gap-8">
-          <nav className="flex items-center gap-8 text-[16px] font-medium tracking-wide">
-            <a href="/" className="text-zinc-400 hover:text-white transition-colors relative group">
-              Home
-            </a>
-            <a href="/about" className="text-white relative group">
-              About
-              <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-white transform origin-left transition-transform duration-300"></span>
-            </a>
-            <a href="/projects" className="text-zinc-400 hover:text-white transition-colors">Projects</a>
-            <a href="/gallery" className="text-zinc-400 hover:text-white transition-colors">Gallery</a>
-            <a href="/#services" className="text-zinc-400 hover:text-white transition-colors">Services</a>
-            <a href="/contact" className="text-zinc-400 hover:text-white transition-colors">Contact</a>
-          </nav>
-          <button className="px-6 py-2.5 rounded-lg bg-white text-black font-semibold shadow-lg hover:bg-zinc-200 transition-colors">Sign Up</button>
-        </div>
-      </header>
+      <Navbar zIndex={50} />
 
       {/* Mountain Scene Hero */}
       <section className="relative w-full h-[80vh] overflow-hidden flex items-center justify-center">

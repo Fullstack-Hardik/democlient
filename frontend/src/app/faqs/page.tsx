@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ChevronDown, MessageCircleQuestion } from "lucide-react";
 import GlyphPortal from "@/components/ui/glyph-portal";
 import Beams from "@/components/ui/Beams";
 import { Footer } from "@/components/ui/Footer";
+import Navbar from "@/components/ui/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { Outfit } from "next/font/google";
 import Head from "next/head";
@@ -167,27 +168,7 @@ export default function FAQsPage() {
             } as any}
             front={
               <>
-                <header className="absolute top-6 left-6 right-6 lg:left-12 lg:right-12 h-12 flex items-center justify-between z-50">
-                  <Link href="/" className="flex items-center justify-center w-32 block no-underline z-50 bg-white px-4 py-2 rounded-xl transition-all hover:bg-zinc-200" aria-label="HRDK home">
-                    <img src="/logo.svg" alt="HRDK Logo" className="h-8 w-auto" />
-                  </Link>
-                  
-                  <div className="hidden md:flex items-center gap-8">
-                    <nav className="flex items-center gap-8 text-[16px] font-medium tracking-wide">
-                      <Link href="/" className="text-zinc-400 hover:text-white transition-colors relative group">Home</Link>
-                      <Link href="/about" className="text-zinc-400 hover:text-white transition-colors relative group">About</Link>
-                      <Link href="/projects" className="text-zinc-400 hover:text-white transition-colors relative group">Projects</Link>
-                      <Link href="/gallery" className="text-zinc-400 hover:text-white transition-colors relative group">Gallery</Link>
-                      <Link href="/faqs" className="text-white relative group">
-                        FAQs
-                        <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-white transform origin-left transition-transform duration-300"></span>
-                      </Link>
-                      <Link href="/#services" className="text-zinc-400 hover:text-white transition-colors relative group">Services</Link>
-                      <Link href="/contact" className="text-zinc-400 hover:text-white transition-colors relative group">Contact</Link>
-                    </nav>
-                    <button className="px-6 py-2.5 rounded-lg bg-white text-black font-semibold shadow-lg hover:bg-zinc-200 transition-colors pointer-events-auto">Sign Up</button>
-                  </div>
-                </header>
+                <Navbar zIndex={50} />
                 
                 <div className="absolute bottom-[10%] left-0 right-0 flex justify-center pointer-events-none">
                   <span className="text-[#ffffff] text-sm tracking-widest uppercase animate-pulse opacity-70">Scroll to enter ↓</span>
