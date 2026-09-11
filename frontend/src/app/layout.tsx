@@ -5,8 +5,8 @@ import ClickSpark from '@/components/ui/ClickSpark';
 import SmoothScroll from '@/components/ui/SmoothScroll';
 
 export const metadata: Metadata = {
-  title: 'Stop Digging Through Dashboards',
-  description: 'Vantage landing page',
+  title: 'HRDK | Fullstack Developer & Digital Product Designer',
+  description: 'Portfolio of HRDK, a digital product designer and full-stack developer.',
 };
 
 export default function RootLayout({

@@ -311,27 +311,6 @@ export default function AboutUsSection() {
               ))}
           </div>
         </div>
-
-        {/* CTA Section */}
-        <motion.div
-          className="mt-20 bg-zinc-900 border border-white/10 text-white p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-900/20 to-cyan-900/20 pointer-events-none" />
-          <div className="flex-1 relative z-10">
-            <h3 className="text-2xl font-bold mb-2">Ready to transform your space?</h3>
-            <p className="text-gray-400">Let's create something beautiful together.</p>
-          </div>
-          <motion.button
-            className="bg-orange-600 hover:bg-orange-500 text-white px-8 py-4 rounded-full flex items-center gap-2 font-bold uppercase tracking-wider transition-colors shadow-lg shadow-orange-500/20 relative z-10"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Get Started <ArrowRight className="w-4 h-4" />
-          </motion.button>
-        </motion.div>
       </motion.div>
     </section>
   )

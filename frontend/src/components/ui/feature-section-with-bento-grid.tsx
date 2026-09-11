@@ -80,7 +80,7 @@ const FeatureCard = ({
     <motion.div 
       whileHover={{ scale: 0.98, rotateX: 2, rotateY: 2, zIndex: 10 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className={cn(`p-4 sm:p-8 relative overflow-hidden transition-all duration-300 bg-neutral-900/20 hover:bg-neutral-900/40 hover:shadow-2xl hover:shadow-orange-500/10 perspective-1000`, className)}
+      className={cn(`p-6 sm:p-10 relative overflow-hidden transition-all duration-300 backdrop-blur-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:shadow-2xl hover:shadow-orange-500/20 rounded-3xl perspective-1000`, className)}
     >
       {children}
     </motion.div>
@@ -111,21 +111,21 @@ const FeatureDescription = ({ children }: { children?: React.ReactNode }) => {
 
 export const SkeletonOne = () => {
   return (
-    <div className="relative flex py-8 px-2 gap-10 h-full">
-      <div className="w-full p-5 mx-auto bg-neutral-900 shadow-2xl group h-full">
+    <div className="relative flex py-8 px-2 gap-10 h-full min-h-[16rem]">
+      <div className="w-full p-5 mx-auto bg-black/40 backdrop-blur-md rounded-2xl shadow-2xl group h-full border border-white/10">
         <div className="flex flex-1 w-full h-full flex-col space-y-2">
           <Image
-            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80"
+            src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=800&q=80"
             alt="header"
             width={800}
             height={800}
-            className="h-full w-full aspect-square object-cover object-left-top rounded-sm"
+            className="h-full w-full aspect-square object-cover object-left-top rounded-xl opacity-80 group-hover:opacity-100 transition-opacity"
           />
         </div>
       </div>
 
-      <div className="absolute bottom-0 z-40 inset-x-0 h-60 bg-gradient-to-t from-black via-black to-transparent w-full pointer-events-none" />
-      <div className="absolute top-0 z-40 inset-x-0 h-60 bg-gradient-to-b from-black via-transparent to-transparent w-full pointer-events-none" />
+      <div className="absolute bottom-0 z-40 inset-x-0 h-60 bg-gradient-to-t from-[#050505] to-transparent w-full pointer-events-none" />
+      <div className="absolute top-0 z-40 inset-x-0 h-60 bg-gradient-to-b from-[#050505] to-transparent w-full pointer-events-none" />
     </div>
   );
 };
@@ -141,11 +141,11 @@ export const SkeletonThree = () => {
         <div className="flex flex-1 w-full h-full flex-col space-y-2 relative">
           <IconBrandYoutubeFilled className="h-20 w-20 absolute z-10 inset-0 text-orange-500 m-auto" />
           <Image
-            src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
+            src="https://images.unsplash.com/photo-1531297172864-822d1fea59d7?w=800&q=80"
             alt="header"
             width={800}
             height={800}
-            className="h-full w-full aspect-square object-cover object-center rounded-sm blur-none group-hover/image:blur-md transition-all duration-200"
+            className="h-full w-full aspect-square object-cover object-center rounded-xl blur-none group-hover/image:blur-md transition-all duration-200"
           />
         </div>
       </div>
@@ -155,11 +155,11 @@ export const SkeletonThree = () => {
 
 export const SkeletonTwo = () => {
   const images = [
-    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=80",
-    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80",
-    "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&q=80",
-    "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80",
     "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&q=80",
+    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=80",
+    "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&q=80",
+    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80",
+    "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80",
   ];
 
   const imageVariants = {
@@ -221,8 +221,8 @@ export const SkeletonTwo = () => {
         ))}
       </div>
 
-      <div className="absolute left-0 z-[100] inset-y-0 w-20 bg-gradient-to-r from-black to-transparent h-full pointer-events-none" />
-      <div className="absolute right-0 z-[100] inset-y-0 w-20 bg-gradient-to-l from-black to-transparent h-full pointer-events-none" />
+      <div className="absolute left-0 z-[100] inset-y-0 w-20 bg-gradient-to-r from-[#050505] to-transparent h-full pointer-events-none" />
+      <div className="absolute right-0 z-[100] inset-y-0 w-20 bg-gradient-to-l from-[#050505] to-transparent h-full pointer-events-none" />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { Outfit } from "next/font/google";
 import { Footer } from "@/components/ui/Footer";
 import { Skiper28 } from "@/components/ui/perspective-text-scroll";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Heart, BrainCircuit } from "lucide-react";
 
 const premiumFont = Outfit({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] });
 
@@ -29,13 +29,8 @@ export default function ContactPage() {
       
       {/* Header */}
       <header className="absolute top-6 left-6 right-6 lg:left-12 lg:right-12 h-12 flex items-center justify-between z-50">
-        <a href="/" className="w-[25px] h-[25px] block no-underline" aria-label="Vantage home">
-          <svg viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
-            <circle cx="12.5" cy="12.5" r="12.5" fill="#ededed"/>
-            <path d="M12.5 4 L16 12.5 L12.5 21 L9 12.5 Z" fill="#050606"/>
-            <path d="M4 12.5 L12.5 16 L21 12.5 L12.5 9 Z" fill="#737778" opacity="0.8"/>
-            <circle cx="12.5" cy="12.5" r="2" fill="#fafafa"/>
-          </svg>
+        <a href="/" className="flex items-center justify-center w-32 block no-underline z-50 bg-white px-4 py-2 rounded-xl transition-all hover:bg-zinc-200" aria-label="HRDK home">
+          <img src="/logo.svg" alt="HRDK Logo" className="h-8 w-auto" />
         </a>
         
         <div className="hidden md:flex items-center gap-8">
@@ -50,6 +45,9 @@ export default function ContactPage() {
             <a href="/gallery" className="text-zinc-400 hover:text-white transition-colors relative group">
               Gallery
             </a>
+            <a href="/faqs" className="text-zinc-400 hover:text-white transition-colors relative group">
+              FAQs
+            </a>
             <a href="/#services" className="text-zinc-400 hover:text-white transition-colors relative group">
               Services
             </a>
@@ -63,15 +61,75 @@ export default function ContactPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative w-full h-[40svh] min-h-[300px] flex flex-col items-center justify-center overflow-hidden border-b border-white/10 pt-20">
-        <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-transparent via-black/50 to-black" />
-        <div className="relative z-10 flex flex-col items-center w-full px-6 lg:px-24 xl:px-32 text-center">
-          <h1 className="flex flex-col font-semibold tracking-tighter text-5xl md:text-6xl lg:text-[4rem] leading-[1.1] mb-4 drop-shadow-xl text-white">
-            <span>Get in Touch.</span>
-          </h1>
-          <p className="text-zinc-400 font-light text-lg md:text-xl max-w-2xl mx-auto drop-shadow-lg">
-            We'd love to hear from you. Drop us a message and we'll get back to you as soon as possible.
-          </p>
+      <section className="relative w-full min-h-[90svh] flex flex-col items-center justify-center overflow-hidden border-b border-white/10 bg-[#050505] bg-[radial-gradient(#333_1px,transparent_1px)] [background-size:24px_24px]">
+        {/* Gradient Overlay for blending */}
+        <div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_center,transparent_20%,#050505_100%)] opacity-80" />
+        
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 h-full flex flex-col items-center justify-center pt-24 pb-32">
+          
+          {/* Main Typography Layout */}
+          <div className="relative w-full flex flex-col items-center justify-center gap-6 md:gap-12 mt-12">
+            
+            {/* Top Row: DIGITAL */}
+            <div className="w-full flex justify-center md:justify-end md:pr-32 lg:pr-48 relative">
+              <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-light tracking-tight text-white/90">
+                DIGITAL
+              </h1>
+              {/* Floating Text 1 */}
+              <div className="hidden md:block absolute -left-12 lg:left-0 top-0 max-w-[200px] text-right">
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  I am india digital product designer based in Bokaro Steel City, India.
+                </p>
+              </div>
+            </div>
+
+            {/* Middle Row: PR [Icon] DUCTS */}
+            <div className="w-full flex justify-center items-center gap-4 md:gap-8 relative">
+              <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-light tracking-tight text-white/90">
+                PR
+              </h1>
+              <div className="relative flex items-center justify-center w-20 h-20 md:w-32 md:h-32">
+                <BrainCircuit className="w-full h-full text-white/90 stroke-1" />
+                <span className="absolute text-2xl md:text-4xl font-light text-white/90">?</span>
+              </div>
+              <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-light tracking-tight text-white/90">
+                DUCTS
+              </h1>
+              
+              {/* Floating Text 2 */}
+              <div className="hidden md:block absolute right-0 lg:-right-12 top-1/2 -translate-y-1/2 max-w-[240px] text-left">
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  Open to all forms of design collaboration, regardless of location and language.
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Row: DESIGN [Icon] CODE */}
+            <div className="w-full flex justify-center items-center gap-4 md:gap-8">
+              <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-light tracking-tight text-white/90">
+                DESIGN
+              </h1>
+              <div className="flex items-center justify-center">
+                <Heart className="w-16 h-16 md:w-28 md:h-28 text-[#ff4b5c] fill-[#ff4b5c]" />
+              </div>
+              <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-light tracking-tight text-white/90">
+                CODE
+              </h1>
+            </div>
+
+          </div>
+          
+          {/* Footer Bar inside Hero */}
+          <div className="absolute bottom-0 left-0 right-0 w-full px-6 md:px-12 py-6 border-t border-white/10 flex flex-col md:flex-row justify-end items-center gap-4 text-sm md:text-base">
+            <span className="text-zinc-300 font-medium tracking-widest uppercase text-xs md:text-sm">
+              Bokaro Steel City, India 827010
+            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-white font-medium tracking-widest uppercase text-lg md:text-xl">DESIGNER</span>
+              <span className="text-[#ff5800] italic font-semibold text-xl md:text-2xl" style={{ fontFamily: 'Georgia, serif' }}>Hardik</span>
+            </div>
+          </div>
+
         </div>
       </section>
 

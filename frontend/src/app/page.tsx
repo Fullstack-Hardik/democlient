@@ -118,13 +118,8 @@ export default function Home() {
         <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-transparent via-black/20 to-black" />
 
         <header className="absolute top-6 left-6 right-6 lg:left-12 lg:right-12 h-12 flex items-center justify-between z-20">
-          <a href="#" className="w-[25px] h-[25px] block no-underline z-50" aria-label="Vantage home">
-            <svg viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
-              <circle cx="12.5" cy="12.5" r="12.5" fill="#ededed"/>
-              <path d="M12.5 4 L16 12.5 L12.5 21 L9 12.5 Z" fill="#050606"/>
-              <path d="M4 12.5 L12.5 16 L21 12.5 L12.5 9 Z" fill="#737778" opacity="0.8"/>
-              <circle cx="12.5" cy="12.5" r="2" fill="#fafafa"/>
-            </svg>
+        <a href="/" className="flex items-center justify-center w-32 block no-underline z-50 bg-white px-4 py-2 rounded-xl transition-all hover:bg-zinc-200" aria-label="HRDK home">
+            <img src="/logo.svg" alt="HRDK Logo" className="h-8 w-auto" />
           </a>
           
           {/* Desktop Navigation */}
@@ -138,6 +133,7 @@ export default function Home() {
               </a>
               <a href="/projects" className="text-zinc-400 hover:text-white transition-colors">Projects</a>
               <a href="/gallery" className="text-zinc-400 hover:text-white transition-colors">Gallery</a>
+              <a href="/faqs" className="text-zinc-400 hover:text-white transition-colors">FAQs</a>
               <a href="/#services" className="text-zinc-400 hover:text-white transition-colors">Services</a>
               <a href="/contact" className="text-zinc-400 hover:text-white transition-colors">Contact</a>
             </nav>
@@ -171,6 +167,7 @@ export default function Home() {
             <a href="/about" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>About</a>
             <a href="/projects" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>Projects</a>
             <a href="/gallery" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>Gallery</a>
+            <a href="/faqs" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>FAQs</a>
             <a href="/#services" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>Services</a>
             <a href="/contact" className="text-white hover:text-zinc-300 transition-colors" onClick={() => setMenuOpen(false)}>Contact</a>
           </nav>
@@ -275,7 +272,7 @@ export default function Home() {
             <div className="min-w-[180px] flex-1">
               <p className="mb-2 text-sm font-bold uppercase tracking-wider text-white">Backend</p>
               <p className="text-[clamp(0.85rem,1vw,1.05rem)] leading-relaxed text-white/80">
-                Node.js, Python, and scalable APIs that never sleep.
+                Node.js, Express.js REST APIs, and scalable architecture.
               </p>
             </div>
             <div className="min-w-[180px] flex-1">

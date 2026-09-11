@@ -7,7 +7,7 @@ import { Coffee } from "lucide-react";
 import GenerativeMountainScene from "@/components/ui/mountain-scene";
 import AboutUsSection from "@/components/about/AboutUsSection";
 import ColorBends from "@/components/ui/ColorBends";
-import { FeaturesSectionWithBentoGrid } from "@/components/ui/feature-section-with-bento-grid";
+import { ConnoisseurStackInteractor } from "@/components/ui/connoisseur-stack-interactor";
 import { Footer } from "@/components/ui/Footer";
 
 const premiumFont = Outfit({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] });
@@ -35,13 +35,8 @@ export default function AboutPage() {
       
       {/* Header */}
       <header className="absolute top-6 left-6 right-6 lg:left-12 lg:right-12 h-12 flex items-center justify-between z-50">
-        <a href="/" className="w-[25px] h-[25px] block no-underline" aria-label="Vantage home">
-          <svg viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
-            <circle cx="12.5" cy="12.5" r="12.5" fill="#ededed"/>
-            <path d="M12.5 4 L16 12.5 L12.5 21 L9 12.5 Z" fill="#050606"/>
-            <path d="M4 12.5 L12.5 16 L21 12.5 L12.5 9 Z" fill="#737778" opacity="0.8"/>
-            <circle cx="12.5" cy="12.5" r="2" fill="#fafafa"/>
-          </svg>
+        <a href="/" className="flex items-center justify-center w-32 block no-underline z-50 bg-white px-4 py-2 rounded-xl transition-all hover:bg-zinc-200" aria-label="HRDK home">
+          <img src="/logo.svg" alt="HRDK Logo" className="h-8 w-auto" />
         </a>
         
         <div className="hidden md:flex items-center gap-8">
@@ -106,9 +101,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <div className="bg-black border-t border-white/5">
-        <FeaturesSectionWithBentoGrid />
+      {/* Interactive Stack Section */}
+      <div className="bg-black border-t border-white/5 py-24">
+        <ConnoisseurStackInteractor />
       </div>
 
       {/* Footer Section */}
