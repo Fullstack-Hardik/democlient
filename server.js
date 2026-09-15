@@ -16,6 +16,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
+// Ignore favicon requests to prevent 404 errors in browser console
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 // State
 let isRunning = false;
 let targetUrl = '';
