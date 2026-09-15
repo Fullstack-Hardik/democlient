@@ -4,7 +4,6 @@ const https = require('https');
 const { Server } = require('socket.io');
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-const useProxy = require('puppeteer-page-proxy');
 const randomUseragent = require('random-useragent');
 const path = require('path');
 
@@ -19,15 +18,12 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
-// Ignore favicon requests to prevent 404 errors in browser console
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 
-// State
 let isRunning = false;
 let targetUrl = '';
-let speedRpm = 60; // Requests per minute
+let speedRpm = 60;
 let proxiesList = []; 
-let globalBrowser = null;
 
 let metrics = {
     requestsSent: 0,
@@ -36,40 +32,18 @@ let metrics = {
     activeBrowsers: 0
 };
 
-// Broadcast metrics every second
 setInterval(() => {
     io.emit('metrics', metrics);
 }, 1000);
 
-async function initBrowser() {
-    if (!globalBrowser) {
-        globalBrowser = await puppeteer.launch({ 
-            headless: 'new',
-            args: [
-                '--no-sandbox', 
-                '--disable-setuid-sandbox',
-                '--disable-blink-features=AutomationControlled',
-                '--disable-dev-shm-usage',
-                '--disable-accelerated-2d-canvas',
-                '--disable-gpu',
-                '--no-first-run',
-                '--no-zygote',
-                '--single-process'
-            ]
-        });
-    }
-}
-
 async function scrapeProxies() {
     return new Promise((resolve) => {
-        https.get('https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all', (res) => {
+        https.get('https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=5000&country=all&ssl=all&anonymity=all', (res) => {
             let data = '';
             res.on('data', chunk => data += chunk);
             res.on('end', () => {
                 const proxies = data.split('\n').map(p => p.trim()).filter(p => p);
-                console.log(`Scraped ${proxies.length} free proxies!`);
-                
-                // Format for puppeteer-page-proxy
+                console.log(`Scraped ${proxies.length} free proxies! (Note: Free proxies often fail or timeout)`);
                 resolve(proxies.map(p => p.includes('http') ? p : `http://${p}`));
             });
         }).on('error', (err) => {
@@ -80,17 +54,34 @@ async function scrapeProxies() {
 }
 
 async function checkWebsiteStatus(url, proxy) {
-    let context = null;
-    let page = null;
+    let browser = null;
     try {
         metrics.requestsSent++;
         metrics.activeBrowsers++;
         
-        await initBrowser();
+        let args = [
+            '--no-sandbox', 
+            '--disable-setuid-sandbox',
+            '--disable-blink-features=AutomationControlled',
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--disable-gpu',
+            '--no-first-run',
+            '--no-zygote',
+            '--single-process'
+        ];
+
+        // Safely apply proxy at the browser level (100% reliable compared to page-proxy)
+        if (proxy) {
+            args.push(`--proxy-server=${proxy}`);
+        }
+
+        browser = await puppeteer.launch({ 
+            headless: 'new',
+            args: args
+        });
         
-        // Create an incognito context for a clean session per request
-        context = await globalBrowser.createBrowserContext();
-        page = await context.newPage();
+        const page = await browser.newPage();
         
         // --- RANDOMIZE FINGERPRINT ---
         const userAgent = randomUseragent.getRandom(ua => ['Chrome', 'Firefox', 'Safari'].includes(ua.browserName)) || 
@@ -106,27 +97,17 @@ async function checkWebsiteStatus(url, proxy) {
         await page.setExtraHTTPHeaders({
             'Accept-Language': `${randomLang},en;q=0.9`
         });
-        // ------------------------------
         
-        // Block heavy resources to drastically reduce memory/bandwidth and apply proxy
+        // Block heavy resources
         await page.setRequestInterception(true);
-        page.on('request', async (req) => {
+        page.on('request', (req) => {
             if(['image', 'stylesheet', 'font', 'media'].includes(req.resourceType())) {
                 req.abort();
             } else {
-                if (proxy) {
-                    try {
-                        await useProxy(req, proxy);
-                    } catch (e) {
-                        req.abort(); // if proxy fails
-                    }
-                } else {
-                    req.continue();
-                }
+                req.continue();
             }
         });
 
-        // Fast timeout because free proxies can be extremely slow
         const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 });
         const status = response ? response.status() : 'Unknown';
         
@@ -136,15 +117,12 @@ async function checkWebsiteStatus(url, proxy) {
             metrics.errors++;
         }
         
-        // Short wait to simulate real user engagement
         await new Promise(resolve => setTimeout(resolve, 2000));
         
     } catch (e) {
-        // Suppress massive error spam from dead free proxies
         metrics.errors++;
     } finally {
-        if (page) await page.close().catch(() => {});
-        if (context) await context.close().catch(() => {});
+        if (browser) await browser.close().catch(() => {});
         metrics.activeBrowsers--;
     }
 }
@@ -159,7 +137,7 @@ async function trafficLoop() {
         proxyToUse = proxiesList[Math.floor(Math.random() * proxiesList.length)];
     }
     
-    // Do not await, fire and forget to maintain RPM
+    // Fire and forget
     checkWebsiteStatus(targetUrl, proxyToUse);
     
     setTimeout(trafficLoop, delayBetweenRequests);
@@ -178,7 +156,6 @@ async function startTraffic() {
         proxiesList = await scrapeProxies();
     }
     
-    await initBrowser();
     trafficLoop();
 }
 
@@ -186,11 +163,6 @@ function stopTraffic() {
     if (!isRunning) return;
     isRunning = false;
     console.log(`Stopped traffic.`);
-    if (globalBrowser) {
-        globalBrowser.close().then(() => {
-            globalBrowser = null;
-        }).catch(() => {});
-    }
 }
 
 app.post('/api/start', async (req, res) => {
@@ -204,10 +176,9 @@ app.post('/api/start', async (req, res) => {
     if (proxies && typeof proxies === 'string') {
         proxiesList = proxies.split('\n').map(p => p.trim()).filter(p => p);
     } else {
-        proxiesList = []; // Will trigger auto-scrape in startTraffic
+        proxiesList = [];
     }
 
-    // Call async startTraffic without blocking UI
     startTraffic();
     res.json({ success: true, message: 'Traffic started' });
 });
