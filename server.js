@@ -108,7 +108,7 @@ async function checkWebsiteStatus(url, proxy) {
             }
         });
 
-        const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 });
+        const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
         const status = response ? response.status() : 'Unknown';
         
         if (status === 200 || status === 304 || status === 201) {
@@ -150,11 +150,6 @@ async function startTraffic() {
     
     const intervalMs = (60000 / speedRpm) || 1000;
     console.log(`Starting traffic to ${targetUrl} at ${speedRpm} RPM (~${intervalMs}ms interval)`);
-    
-    if (proxiesList.length === 0) {
-        console.log("No proxies provided, auto-scraping free global proxies...");
-        proxiesList = await scrapeProxies();
-    }
     
     trafficLoop();
 }
